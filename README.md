@@ -44,7 +44,7 @@ You can download the dataset from Kaggle: [Kermany et al., OCT2017 Dataset](http
 ├── models/
 │   └── best_oct_resnet_classifier.pkl
 ├── .gitignore
-├── 01_data_visualization_and_eda.ipynb
+├── data_visualization.ipynb
 ├── 02_extract_features.py
 ├── 03_train_model.py
 ├── 04_model_evaluation.ipynb
@@ -72,15 +72,7 @@ Follow these steps to set up the project environment.
 
 Execute the scripts in the following order.
 
-### 1\. (Optional) Explore the Data
-
-Run the Jupyter Notebook `01_data_visualization_and_eda.ipynb` to understand the class distribution and view sample images.
-
-```bash
-jupyter notebook 01_data_visualization_and_eda.ipynb
-```
-
-### 2\. Extract Features
+### 1\. Extract Features
 
 This script will process all images in the `data` directory, use ResNet50 to extract features, and save them to a CSV file.
 **This will take a significant amount of time and CPU/GPU resources.**
@@ -91,7 +83,7 @@ python 02_extract_features.py
 
   * **Output**: A file named `resnet50_features.csv` will be created in the `features/` directory.
 
-### 3\. Train the Classifier
+### 2\. Train the Classifier
 
 This script loads the extracted features, trains several Scikit-learn models (Logistic Regression, SVC, Random Forest), evaluates them, and saves the best-performing model.
 
@@ -101,21 +93,20 @@ python 03_train_model.py
 
   * **Output**: The best model pipeline will be saved as `best_oct_resnet_classifier.pkl` in the `models/` directory.
 
-### 4\. (Optional) Evaluate the Best Model
+### 4\. Evaluate the Best Model
 
-Run the Jupyter Notebook `04_model_evaluation.ipynb` to perform a detailed analysis of the best model's performance, including a classification report and a confusion matrix.
+Run the Jupyter Notebook `data_visualization.ipynbb` to perform a detailed analysis of the best model's performance, including a classification report and a confusion matrix.
 
 ```bash
-jupyter notebook 04_model_evaluation.ipynb
+jupyter notebook data_visualization.ipynb
 ```
 
 ### 5\. Run the Interactive Web App
 
 Launch the Streamlit application to perform live predictions.
+`app.py`
 
-```bash
-streamlit run app.py
-```
+
 
   * Open your web browser and navigate to the local URL provided in the terminal to interact with the application.
 
@@ -131,6 +122,6 @@ streamlit run app.py
 
 ## 📈 Model Performance
 
-The hybrid model combining ResNet50 features with a Random Forest classifier achieves excellent performance, with a weighted F1-score of approximately **97%** on the test set. The detailed per-class metrics can be reviewed in the `04_model_evaluation.ipynb` notebook.
+The hybrid model combining ResNet50 features with a Random Forest classifier achieves excellent performance, with a weighted F1-score of approximately **97%** on the test set. The detailed per-class metrics can be reviewed in the `data_visualization.ipynb` notebook.
 
 
