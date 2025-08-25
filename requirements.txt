@@ -2,6 +2,7 @@
 tensorflow
 pandas
 numpy
+scikit-learn
 
 # Traditional Machine Learning
 scikit-learn
@@ -16,3 +17,7 @@ streamlit
 
 # Utility for progress bars
 tqdm
+
+# Data visualization
+seaborn
+matplotlib
