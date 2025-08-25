@@ -25,6 +25,10 @@ The workflow is designed to be modular and reproducible, broken down into distin
 ## 💾 Dataset
 
 This project uses the **"OCT2017"** dataset, which contains over 84,000 OCT images of retinal tissue. The dataset is organized by the four categories mentioned above.
+This dataset has 4 classes as disease
+-- Current model used only 42,976 images
+  Training- 3000 each classes
+  Testing- 242 each class
 
 You can download the dataset from Kaggle: [Kermany et al., OCT2017 Dataset](https://www.kaggle.com/datasets/paultimothymooney/kermany2018)
 
