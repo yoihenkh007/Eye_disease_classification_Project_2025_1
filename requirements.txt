@@ -1,0 +1,18 @@
+# Deep Learning and Feature Extraction
+tensorflow
+pandas
+numpy
+
+# Traditional Machine Learning
+scikit-learn
+joblib
+
+# Image Processing
+opencv-python-headless
+Pillow
+
+# Web Application Framework
+streamlit
+
+# Utility for progress bars
+tqdm
