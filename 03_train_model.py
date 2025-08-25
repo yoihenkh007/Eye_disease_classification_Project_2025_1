@@ -10,18 +10,17 @@ from sklearn.svm import SVC
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report
 
-# --- Configuration ---
-# MODIFIED: Point to the new features file
+# Path
+
 FEATURES_PATH = os.path.join('features', 'resnet50_features.csv') 
 MODELS_PATH = 'models'
-# ---------------------
 
 def train_and_evaluate():
     """Loads features, trains classifiers, and saves the best model."""
     print("Loading features...")
     df = pd.read_csv(FEATURES_PATH)
 
-    # Handle potential NaN/infinity values from feature extraction if any
+    # Handle potential NaN/infinity values from feature extraction if any 
     df.replace([np.inf, -np.inf], np.nan, inplace=True)
     df.dropna(inplace=True)
 
@@ -30,8 +29,7 @@ def train_and_evaluate():
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
     
-    # Define models to train
-    # Note: With high-dimensional features from ResNet50, simpler models can also perform well.
+    # Defining models to train
     models = {
         'Logistic Regression': LogisticRegression(max_iter=1000, solver='lbfgs', C=0.1),
         'SVC': SVC(kernel='rbf', C=1, probability=True), # Changed kernel to RBF which often works better
@@ -44,8 +42,8 @@ def train_and_evaluate():
     for name, model in models.items():
         print(f"\n--- Training {name} ---")
         
-        # Create a pipeline with a scaler and the model
-        # Scaling is important for Logistic Regression and SVC
+        # Create a pipelining  scaler and the model
+    
         pipeline = Pipeline([
             ('scaler', StandardScaler()),
             ('classifier', model)
@@ -59,7 +57,7 @@ def train_and_evaluate():
         report = classification_report(y_test, y_pred)
         print(report)
         
-        # Check for the best model based on weighted F1-score
+        # Checking  for the best model based on weighted F1-score
         report_dict = classification_report(y_test, y_pred, output_dict=True)
         current_score = report_dict['weighted avg']['f1-score']
         
@@ -68,12 +66,11 @@ def train_and_evaluate():
             best_model = pipeline
             print(f"*** New best model found: {name} with F1-score: {best_score:.4f} ***")
 
-    # Save the best model
+    # output - best model
     if best_model:
         if not os.path.exists(MODELS_PATH):
             os.makedirs(MODELS_PATH)
         
-        # MODIFIED: Save with a new name
         model_filename = os.path.join(MODELS_PATH, 'best_oct_resnet_classifier.pkl')
         joblib.dump(best_model, model_filename)
         print(f"\nBest model saved to '{model_filename}'")

@@ -11,19 +11,18 @@ from tensorflow.keras.models import Model
 from tensorflow.keras.layers import GlobalAveragePooling2D
 from tensorflow.keras.preprocessing.image import img_to_array
 
-# --- Configuration ---
-CLASSES = ['CNV', 'DME', 'DRUSEN', 'NORMAL']
-# MODIFIED: Point to the new model file
-MODEL_FILENAME = 'best_oct_resnet_classifier.pkl' 
-# ----------------------------------------------------------------
 
-# --- Constants ---
+CLASSES = ['CNV', 'DME', 'DRUSEN', 'NORMAL']
+# path to best_model
+MODEL_FILENAME = 'best_oct_resnet_classifier.pkl' 
+
+# models path
 MODEL_PATH = os.path.join('models', MODEL_FILENAME)
-# MODIFIED: ResNet50 uses 224x224 images
+# RESIZE ti fit model 
 IMAGE_SIZE = (224, 224) 
 # ----------------------------------------------------------------
 
-# <-- Sidebar with updated project information -->
+# SIDEBAR with info
 with st.sidebar:
     st.title("About the OCT Classifier")
     st.markdown("""
@@ -100,11 +99,11 @@ if uploaded_file is not None and classifier_model is not None and feature_extrac
     
     image_np = np.array(image)
     
-    # Extract features using the ResNet50 model
+    # Feature Extraction - ResNet50 model
     features = extract_features(image_np, feature_extractor_model)
     features_reshaped = features.reshape(1, -1)
     
-    # Get prediction from the scikit-learn model
+    # fetching prediction 
     prediction_proba = classifier_model.predict_proba(features_reshaped)
     prediction = classifier_model.predict(features_reshaped)[0]
     

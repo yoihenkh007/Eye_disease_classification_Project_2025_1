@@ -9,25 +9,23 @@ from tensorflow.keras.models import Model
 from tensorflow.keras.layers import GlobalAveragePooling2D
 from tensorflow.keras.preprocessing.image import img_to_array, load_img
 
-# --- Configuration ---
+# PATH
 DATA_PATH = os.path.join('data', 'OCT2017', 'train')
 OUTPUT_PATH = 'features'
-# ResNet50 uses 224x224 images as input
+# INPUT images 224x224 
 IMAGE_SIZE = (224, 224) 
-CLASSES = ['CNV', 'DME', 'DRUSEN', 'NORMAL']
-# ---------------------
+CLASSES = ['CNV', 'DME', 'DRUSEN', 'NORMAL'] # DISEASE
 
 def get_feature_extractor():
     """Creates and returns the ResNet50 model for feature extraction."""
-    # Load ResNet50 base model, pre-trained on ImageNet
-    # include_top=False means we don't include the final classification layer
+   
     base_model = ResNet50(weights='imagenet', include_top=False, input_shape=(IMAGE_SIZE[0], IMAGE_SIZE[1], 3))
     
-    # Add a global average pooling layer to get a fixed-size feature vector
+    # fixed sized vector
     x = base_model.output
     x = GlobalAveragePooling2D()(x)
     
-    # The final model for feature extraction
+    # Tfeature extraction modell output
     model = Model(inputs=base_model.input, outputs=x)
     return model
 
@@ -43,13 +41,13 @@ def extract_features(image_path, model):
         # Expand dimensions to create a "batch" of 1 image
         img_batch = np.expand_dims(img_array, axis=0)
         
-        # Preprocess the image for the ResNet50 model (scaling, etc.)
+        # Preprocess - scaling
         img_preprocessed = preprocess_input(img_batch)
         
-        # Extract features
+        # features Extraction
         features = model.predict(img_preprocessed, verbose=0)
         
-        # Flatten the features to a 1D array
+        # Flatten  to  1D array
         return features.flatten()
         
     except Exception as e:
@@ -61,7 +59,7 @@ def process_and_save_features():
     if not os.path.exists(OUTPUT_PATH):
         os.makedirs(OUTPUT_PATH)
 
-    # Get the feature extraction model
+    # feature_ectraction model
     print("Loading ResNet50 model...")
     model = get_feature_extractor()
     print("Model loaded.")
@@ -85,13 +83,13 @@ def process_and_save_features():
     feature_df = pd.DataFrame(all_features)
     feature_df['label'] = all_labels
 
-    # Save to a CSV file
+    # output - CSV file
     output_file = os.path.join(OUTPUT_PATH, 'resnet50_features.csv')
     feature_df.to_csv(output_file, index=False)
     print(f"Features saved successfully to '{output_file}'!")
 
 if __name__ == '__main__':
-    # Ensure TensorFlow is not using all GPU memory if you have other processes running
+    # tensorflow gpu optimization
     gpus = tf.config.experimental.list_physical_devices('GPU')
     if gpus:
         try:
