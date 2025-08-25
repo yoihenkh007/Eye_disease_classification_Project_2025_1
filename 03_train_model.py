@@ -32,7 +32,7 @@ def train_and_evaluate():
     # Defining models to train
     models = {
         'Logistic Regression': LogisticRegression(max_iter=1000, solver='lbfgs', C=0.1),
-        'SVC': SVC(kernel='rbf', C=1, probability=True), # Changed kernel to RBF which often works better
+        'SVC': SVC(kernel='rbf', C=1, probability=True), 
         'Random Forest': RandomForestClassifier(n_estimators=200, random_state=42, n_jobs=-1)
     }
 
