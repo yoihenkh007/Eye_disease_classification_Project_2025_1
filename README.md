@@ -61,7 +61,7 @@ You can download the dataset from Kaggle: [Kermany et al., OCT2017 Dataset](http
 
 Follow these steps to set up the project environment.
 
-### 1\. Prerequisites
+### - Prerequisites
 
   * Python 3.9 or higher
 
@@ -97,7 +97,7 @@ python 03_train_model.py
 
   * **Output**: The best model pipeline will be saved as `best_oct_resnet_classifier.pkl` in the `models/` directory.
 
-### 4\. Evaluate the Best Model
+### 3\. Evaluate the Best Model
 
 Run the Jupyter Notebook `data_visualization.ipynbb` to perform a detailed analysis of the best model's performance, including a classification report and a confusion matrix.
 
@@ -105,7 +105,7 @@ Run the Jupyter Notebook `data_visualization.ipynbb` to perform a detailed analy
 jupyter notebook data_visualization.ipynb
 ```
 
-### 5\. Run the Interactive Web App
+### 4\. Run the Interactive Web App
 
 Launch the Streamlit application to perform live predictions.
 `app.py`
