@@ -126,6 +126,6 @@ Launch the Streamlit application to perform live predictions.
 
 ## 📈 Model Performance
 
-The hybrid model combining ResNet50 features with a Random Forest classifier achieves excellent performance, with a weighted F1-score of approximately **97%** on the test set. The detailed per-class metrics can be reviewed in the `data_visualization.ipynb` notebook.
+The hybrid model combining ResNet50 features with a Random Forest classifier achieves excellent performance, with a weighted F1-score of approximately **86%** on the test set. The detailed per-class metrics can be reviewed in the `data_visualization.ipynb` notebook.
 
 
